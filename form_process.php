@@ -1,52 +1,57 @@
 <?php
 
-// define variables and set to empty values
-$name_error = $email_error = $inputSubject_error = $message_error = '';
-$name = $email = $inputSubject = $message = $success = $error = '';
-$success = false;
+//sleep(5);
 
-// sender email
-$emailfrom = 'contact@lucasrouillermonay.dev';
+$response = [
+    'post' => $_POST
+];
+
+// define variables and set to empty values
+$name_error = $email_error = $subject_error = $message_error = '';
+$name = $email = $inputSubject = $message = '';
 
 // form is submitted with POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    $response['server'] = 'true';
+
     // Check if lastname field is empty
-    if (empty($_POST["inputName"])) {
+    if (empty($_POST["name"])) {
         // Display error
-        $name_error = "Required Field";
+        $name_error = "Champs requis";
     } else {
-        $name = $_POST["inputName"];
+        $name = $_POST["name"];
     }
 
     // Check if email field is empty
-    if (empty($_POST["inputEmail"])) {
+    if (empty($_POST["email"])) {
         // Display error
-        $email_error = "Required Field";
+        $email_error = "Champs requis";
     } else {
-        $email = $_POST["inputEmail"];
+        $email = $_POST["email"];
     }
 
     // Check if firstname field is empty
-    if (empty($_POST["inputSubject"])) {
+    if (empty($_POST["subject"])) {
         // Display error
-        $inputSubject_error = "Required Field";
+        $subject_error = "Champs requis";
     } else {
-        $inputSubject = $_POST["inputSubject"];
+        $inputSubject = $_POST["subject"];
     }
 
     // Check if company field is empty
-    if (empty($_POST["inputMessage"])) {
+    if (empty($_POST["message"])) {
         // Display error
-        $message_error = "Required Field";
+        $message_error = "Champs requis";
     } else {
-        $message = $_POST["inputMessage"];
+        $message = $_POST["message"];
     }
 
 
     // if there are not errors, then send the message
-    if ($name_error == '' and $email_error == '' and $inputSubject_error == '' and $message_error == '') {
+    if ($name_error == '' and $email_error == '' and $subject_error == '' and $message_error == '') {
         if (isset($_POST['submit'])) {
+
             // Check if the ReCaptcha field contain a value
             if(empty($_POST['recaptcha-response'])){
                 header('Location: index.php');
@@ -73,60 +78,72 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $data = json_decode($response);
                     // if ReCaptcha is decoded, check if the others fields are not empty
                     if ($data->success) {
-                        //print_r($response); // <-- for Development only
+                        print_r($response); // <-- for Development only
 
                         // connect to the database
-                        $db = mysqli_connect('kh251.myd.infomaniak.com', 'kh251_lrmdevform', 'bnHVJ4mWG3mHZjhmKYyFkWNs', 'kh251_lrmdevdb');
+                        $db = mysqli_connect('', '', '', '');
 
                         // Register all inputs into database
                         $query = "INSERT INTO lrmdevform (nom, email, sujet, message) 
                         VALUES ('$name', '$email', '$inputSubject', '$message')";
                         mysqli_query($db, $query);
 
-                        // inputs field
-                        $name = $_POST['inputName'];
-                        $email = $_POST['inputEmail'];
-                        $inputSubject = $_POST['inputSubject'];
-                        $message = $_POST['inputMessage'];
+                        // Inputs field
+                        $name = $_POST['name'];
+                        $email = $_POST['email'];
+                        $inputSubject = $_POST['subject'];
+                        $message = $_POST['message'];
 
                         $to = 'contact@lucasrouillermonay.dev'; // <-- sender email
-                        $subject = 'Form Submit';
-                        $message_content = 'Fullname: ' . $name . "<br>" . 'E-Mail: ' . $email . "<br>"
-                            . 'Subject: ' . $inputSubject . "<br>" . 'Message: ' . $message;
+                        $subject = 'Soumission formulaire';
+                        $message_content = 'Nom: ' . $name . "<br>" . 'Email: ' . $email . "<br>"
+                            . 'Sujet: ' . $inputSubject . "<br>" . 'Message: ' . $message;
                         $headers = 'MIME-Version: 1.0' . "\r\n" .
                             'Content-type: text/html; charset=UTF-8' . "\r\n" .
                             'Content-Transfer-Encoding: 8bit' . "\r\n" .
-                            'From: ' . $emailfrom . "\r\n" . 'Reply-To: ' . $email . "\r\n";
+                            'From: ' . $email . "\r\n" . 'Reply-To: ' . $email . "\r\n";
 
                         if (mail($to, $subject, $message_content, $headers)) {
-                            $success = "Thanks you! Your message has been successfully sent, I will comeback to you closely";
+                            $response["success"] = "Your form has been successfully send! I come back to you lately.";
                             // reset form values to empty strings
                             $name = $email = $inputSubject = $message = '';
 
                         } else {
-                            $error = "There was an error sending this form, please try again";
+                            $response["error"] = "There was an error sending your form, please try again.";
                             // reset form values to empty strings
                             $name = $email = $inputSubject = $message = '';
                         }
+
                     } else {
-                        //header('Location: index.php');
-                        // reset form values to empty strings
-                        $name = $email = $inputSubject = $message = '';
+                        $response["success"] = "Your personals informations has been successfully send!";
                     }
                 }
             }
         }
     } else {
-        $error = "Please verify theses required field";
+        $response["error"] = "Please check that all informations are correct.";
 
-        $errorInputs = [
-            "inputName" => $name_error,
-            "inputEmail" => $email_error,
-            "inputSubject" => $inputSubject_error,
-            "inputMessage" => $message_error,
+        $response["errorInputs"] = [
+            [
+                'id' => 'name',
+                'errorMessage' => $name_error
+            ],
+            [
+                'id' => 'email',
+                'errorMessage' => $email_error
+            ],
+            [
+                'id' => 'subject',
+                'errorMessage' => $subject_error
+            ],
+            [
+                'id' => 'message',
+                'errorMessage' => $message_error
+            ]
         ];
     }
-    unset($_POST);
 }
+
+echo json_encode($response, JSON_UNESCAPED_UNICODE)
 
 ?>

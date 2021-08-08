@@ -1,12 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr-FR">
 
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Lucas Rouiller-Monay | Personal Website & Resume</title>
-	<meta name="description" content="Lucas Rouiller-Monay | Personal Website and Resume">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="shortcut icon" type="image/x-icon" href="./img/favicon.ico">
+	<link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Lucas Rouiller-Monay - Personal Website and Resume</title>
+
+	<meta name="description" content="Lucas Rouiller-Monay | Personal Website and Resume">
+	<meta name="author" content="Lucas Rouiller-Monay" />
+	<link rel="canonical" href="https://lucasrouillermonay.dev" />
+
+    <!-- Pages -->
+    <script src="./js/pages/about.js"></script>
+
+	<!-- AJAX Validation form -->
+	<style>
+
+	.error-input {
+		border: 0.3em solid red;
+	}
+
+	/* form status */
+	.error {
+    	font-size: 1em;
+    	color: red;
+    	font-weight: 700;
+    	text-align: center;
+	}
+
+	.success {
+    	font-size: .5em;
+    	color: green;
+    	font-weight: 700;
+    	text-align: center;
+	}
+
+	fieldset {
+		margin-bottom: 2em !important;
+	}
+
+	</style>
 
 	<!-- STYLESHEETS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
@@ -37,7 +72,7 @@
   )  |  \  `.___________|/
   `--'   `--'
 
-What are you doing here ?
+What are you doing here ? 
 
 -->
 
@@ -84,7 +119,7 @@ What are you doing here ?
 
 		<nav class="navbar navbar-expand-lg navbar-dark">
 			<a class="navbar-brand" href="" style="font-weight: 700;">
-				Lucas <span style="color:#20c997;">Rouiller-Monay</span>
+				Lucas <span style="color: #FF4C60;">Rouiller-Monay</span>
 			</a>
 			<button aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-target="#navbarNavDropdown" data-toggle="collapse" type="button"><span class="navbar-toggler-icon"></span></button>
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -294,48 +329,38 @@ What are you doing here ?
 
 				<div class="col-md-8 text-center mx-auto">
 
-					<?php include('./form_process.php'); ?>
-
 					<!-- Contact Form Status -->
-					<span class="error"><?= $error ?></span>
-					<?php if(!$success) :?>
+					<span id="response-form"></span>
+
 					<!-- Contact Form -->
-					<form id="contact-form" class="contact-form mt-6" method="post" action="<?= $_SERVER['PHP_SELF']; ?>">
+					<form id="contact-form" class="contact-form mt-6">
 
 						<div class="messages"></div>
 
 						<div class="row">
-							<div class="column col-md-6">
+							<fieldset class="column col-md-6">
 								<!-- Name input -->
-								<div class="form-group">
-									<input type="text" class="form-control <?= $error && $errorInputs['inputName'] ? 'error-input' : '' ?>" name="inputName" value="<?= $name ?>" id="InputName" placeholder="Fullname" required="required" data-error="Required field">
-									<div class="error"><?= $name_error ?></div>
-								</div>
-							</div>
+								<input type="text" class="form-control" name="name" id="name" value="" placeholder="Fullname"  tabindex="1" autofocus>
+								<div class="error"></div>
+							</fieldset>
 
-							<div class="column col-md-6">
+							<fieldset class="column col-md-6">
 								<!-- Email input -->
-								<div class="form-group">
-									<input type="email" class="form-control <?= $error && $errorInputs['InputEmail'] ? 'error-input' : '' ?>" id="InputEmail" name="inputEmail" value="<?= $email ?>" placeholder="E-Mail" required="required" data-error="Required field">
-									<div class="error"><?= $email_error ?></div>
-								</div>
-							</div>
+								<input type="email" class="form-control" id="email" name="email" value="" placeholder="E-Mail" tabindex="2">
+								<div class="error"></div>
+							</fieldset>
 
-							<div class="column col-md-12">
+							<fieldset class="column col-md-12">
 								<!-- Subject input -->
-								<div class="form-group">
-									<input type="text" class="form-control <?= $error && $errorInputs['inputSubject'] ? 'error-input' : '' ?>" id="InputSubject" name="inputSubject" value="<?= $inputSubject ?>" placeholder="Subject" required="required" data-error="Required field">
-									<div class="error"><?= $inputSubject_error ?></div>
-								</div>
-							</div>
+								<input type="text" class="form-control" id="subject" name="subject" value="" placeholder="Subject" tabindex="3">
+								<div class="error"></div>
+							</fieldset>
 
-							<div class="column col-md-12">
+							<fieldset class="column col-md-12">
 								<!-- Message textarea -->
-								<div class="form-group">
-									<textarea class="form-control <?= $error && $errorInputs['inputMessage'] ? 'error-input' : '' ?>" id="InputMessage" name="inputMessage" value="<?= $message ?>" rows="5" placeholder="Message" required="required" data-error="Required field"></textarea>
-									<div class="error"><?= $message_error ?></div>
-								</div>
-							</div>
+								<textarea class="form-control" id="message" name="message" value="" rows="5" placeholder="Message" tabindex="4"></textarea>
+								<div class="error"></div>
+							</fieldset>
 
 							<div>
 								<!-- Google ReCaptcha field -->
@@ -343,13 +368,9 @@ What are you doing here ?
 							</div>
 						</div>
 
-						<button name="submit" type="submit" class="btn btn-default btn-style">Submit</button>
+						<button id="contact-submit" name="submit" type="submit" class="btn btn-default">Submit</button>
 
 					</form>
-
-					<?php else: ?>
-					<span class="success"><?= $success ?></span><!-- Success message -->
-					<?php endif;?>
 
 				</div>
 
@@ -363,6 +384,16 @@ What are you doing here ?
 
 </main>
 
+<footer>
+	<p class="text-center" style="font-size: .6em;margin: 2em;">
+		Template by <a href="https://themeforest.net/user/jthemes/portfolio" target="_blank">Jthemes</a>
+
+		<span style="margin: 0 3px;"> | </span>
+
+		Redesign by <a href="" target="">&copy; Lucas Rouiller-Monay</a>
+	</p>
+</footer>
+
 <!-- Javascript code for ReCaptcha verification -->
 <script src="https://www.google.com/recaptcha/api.js?render=6LeOHPoZAAAAAPVZ7ueeIdDvJw70-rLxDd3O9Scp"></script>
 <script>
@@ -372,23 +403,6 @@ What are you doing here ?
 		});
 	});
 </script>
-
-<!-- on contact form success -->
-<?php if($success != false){ ?>
-<script>
-	// Smooth scroll
-	setTimeout(() => {
-		window.scrollTo({
-			top: 0,
-			left: 0,
-			behavior: 'smooth'
-		});
-	}, 1000);
-
-	// Hide theses elements
-	document.getElementById('contact-form').style.display = 'none';
-</script>
-<?php } // endif ?>
 
 <!-- Go to top button -->
 <a href="javascript:" id="return-to-top"><i class="fas fa-arrow-up"></i></a>
@@ -411,11 +425,7 @@ What are you doing here ?
 <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
 <script src="./js/custom.js"></script>
 <script src="./js/dizzy.js"></script>
-
-<!--
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
--->
+<script srx="./js/ajax.js"></script>
 
 </body>
 
