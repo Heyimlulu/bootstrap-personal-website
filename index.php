@@ -90,7 +90,6 @@ What are you doing here ?
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class="navbar-nav ml-auto scrollspy">
 					<li class="nav-item"><a class="underline-animation nav-link" href="#home">Home</a></li>
-					<li class="nav-item"><a class="underline-animation nav-link" href="#projects">Projects</a></li>
 					<li class="nav-item"><a class="underline-animation nav-link" href="#contact">Contact</a></li>
 				</ul>
 			</div>
@@ -157,128 +156,6 @@ What are you doing here ?
 		</div>
 
 	</section>
-
-<!-- section projects -->
-<section id="projects">
-
-	<div class="container">
-
-		<!-- section title -->
-		<h2 class="section-title wow fadeInUp">My Projects</h2>
-
-		<div class="spacer" data-height="60"></div>
-
-		<!-- portfolio filter (desktop) -->
-		<ul class="portfolio-filter list-inline wow fadeInUp">
-			<li class="current list-inline-item" data-filter="*">All</li>
-			<li class="list-inline-item" data-filter=".personal-project">Personal Project</li>
-			<li class="list-inline-item" data-filter=".orif-aigle">Orif (Aigle)</li>
-		</ul>
-
-		<!-- portfolio filter (mobile) -->
-		<div class="pf-filter-wrapper">
-			<select class="portfolio-filter-mobile">
-				<option value="*">All</option>
-				<option value=".personal-project">Personal Project</option>
-				<option value=".orif-aigle">Orif (Aigle)</option>
-			</select>
-		</div>
-
-		<!-- portolio wrapper -->
-		<div class="row portfolio-wrapper">
-
-			<!-- portfolio item -->
-			<div class="col-md-4 col-sm-6 grid-item personal-project">
-				<a href="#small-dialog" class="work-content">
-					<div class="portfolio-item rounded shadow-dark" style="background-color: #20c997;">
-						<div class="details">
-							<span class="term">Personal Project</span>
-							<h4 class="title">RacoonBot#4764</h4>
-							<span class="more-button"><i class="icon-options"></i></span>
-						</div>
-						<div class="thumb">
-							<img src="img/works/1.svg" alt="Designed by stories / Freepik" />
-							<div class="mask"></div>
-						</div>
-					</div>
-				</a>
-				<div id="small-dialog" class="white-popup zoom-anim-dialog mfp-hide">
-					<h2>RacoonBot#4764</h2>
-					<p>This is my first discord bot I created using the Discord.JS API only and Node.JS, but I released a new version of it using the Discord Akairo Framework. RacoonBot is a multipurpose bot for fun, general and utility commands.</p>
-					<a href="https://top.gg/bot/734426328002068481" rel="noopener" class="btn btn-default btn-style">View on Top.gg</a>
-				</div>
-			</div>
-
-			<!-- portfolio item -->
-			<div class="col-md-4 col-sm-6 grid-item personal-project">
-				<a href="#small-dialog-2" class="work-content">
-					<div class="portfolio-item rounded shadow-dark" style="background-color: #FFD15C;">
-						<div class="details">
-							<span class="term">Personal Project</span>
-							<h4 class="title">Paanya#9764</h4>
-							<span class="more-button"><i class="icon-options"></i></span>
-						</div>
-						<div class="thumb">
-							<img src="img/works/2.svg" alt="Designed by vectorjuice / Freepik" />
-							<div class="mask"></div>
-						</div>
-					</div>
-				</a>
-				<div id="small-dialog-2" class="white-popup zoom-anim-dialog mfp-hide">
-					<h2>Paanya#9764</h2>
-					<p>This is my second discord bot using Discord.JS API, Discord Akairo Framework and Node.JS, it has over 100 commands and is in active development. Paanya is a multipurpose fun bot for discord : Moderation, Image manipulation, Minigames and Utilities</p>
-					<a href="https://top.gg/bot/829230505123119164" rel="noopener" class="btn btn-default btn-style">View on Top.gg</a>
-				</div>
-			</div>
-
-			<!-- portfolio item -->
-			<div class="col-md-4 col-sm-6 grid-item orif-aigle">
-				<a href="#small-dialog-3" class="work-content">
-					<div class="portfolio-item rounded shadow-dark" style="background-color: #FF4C60;">
-						<div class="details">
-							<span class="term">Orif (Aigle)</span>
-							<h4 class="title">Systems Backup</h4>
-							<span class="more-button"><i class="icon-options"></i></span>
-						</div>
-						<div class="thumb">
-							<img src="img/works/3.svg" alt="Designed by vectorjuice / Freepik" />
-							<div class="mask"></div>
-						</div>
-					</div>
-				</a>
-				<div id="small-dialog-3" class="white-popup zoom-anim-dialog mfp-hide">
-					<h2>Systems Backup</h2>
-					<p>Provide a backup solution for servers (Active Directory & File Server) and the personal data of the users present in the IT section at Orif Aigle on a Synology NAS.</p>
-				</div>
-			</div>
-
-			<!-- portfolio item -->
-			<div class="col-md-4 col-sm-6 grid-item orif-aigle">
-				<a href="#small-dialog-4" class="work-content">
-					<div class="portfolio-item rounded shadow-dark" style="background-color: #6f42c1;">
-						<div class="details">
-							<span class="term">Orif (Aigle)</span>
-							<h4 class="title">Auto Insurance Management</h4>
-							<span class="more-button"><i class="icon-options"></i></span>
-						</div>
-						<div class="thumb">
-							<img src="img/works/4.svg" alt="Freepik illustration" />
-							<div class="mask"></div>
-						</div>
-					</div>
-				</a>
-				<div id="small-dialog-4" class="white-popup zoom-anim-dialog mfp-hide">
-					<h2>Auto Insurance Management</h2>
-					<p>An automobile insurance management application using the Spring Boot, Maven and Bootstrap frameworks</p>
-				</div>
-			</div>
-
-		</div>
-
-	</div>
-
-</section>
-
 
 	<!-- section contact -->
 	<section id="contact">
