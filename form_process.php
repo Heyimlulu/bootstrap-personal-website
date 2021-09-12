@@ -6,7 +6,7 @@ $name = $email = $inputSubject = $message = $success = $error = '';
 $success = false;
 
 // sender email
-$emailfrom = 'contact@lucasrouillermonay.dev';
+$emailfrom = '<your-email-here>';
 
 // form is submitted with POST method
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header('Location: index.php');
             } else {
                 // URL
-                $url = "https://www.google.com/recaptcha/api/siteverify?secret=6LeOHPoZAAAAADMvBkI0VUc1hn_UUpENVrLP7kKw&response={$_POST['recaptcha-response']}";
+                $url = "https://www.google.com/recaptcha/api/siteverify?secret=<secret-key>&response={$_POST['recaptcha-response']}";
 
                 // Check if curl is installed
                 if (function_exists('curl_version')) {
@@ -76,10 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         //print_r($response); // <-- for Development only
 
                         // connect to the database
-                        $db = mysqli_connect('kh251.myd.infomaniak.com', 'kh251_lrmdevform', 'bnHVJ4mWG3mHZjhmKYyFkWNs', 'kh251_lrmdevdb');
+                        $db = mysqli_connect('<database>', '<user>', '<password>', '<table>');
 
                         // Register all inputs into database
-                        $query = "INSERT INTO lrmdevform (nom, email, sujet, message) 
+                        $query = "INSERT INTO lrmdevform (name, email, subject, message) 
                         VALUES ('$name', '$email', '$inputSubject', '$message')";
                         mysqli_query($db, $query);
 
